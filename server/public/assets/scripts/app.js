@@ -16,6 +16,7 @@ myApp.controller('MessageController', ['$scope', '$http', function($scope, $http
    //GET
    $scope.getMessages = function(){
       $http.get('/data').then(function(response){
+         console.log(response.data)
          $scope.messagesArray = response.data;
       });
    };

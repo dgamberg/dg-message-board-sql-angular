@@ -1,34 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp">
 <head>
     <meta charset="UTF-8">
-    <title></title>
-
+    <title>Message Board</title>
     <link rel="stylesheet" href="/vendors/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/styles/styles.css"/>
     <script type="text/javascript" src="/vendors/angular.min.js"></script>
     <script type="text/javascript" src="/assets/scripts/app.js"></script>
 </head>
 <body>
-<section class="container">
-    <header class="container">
-        <h1 class="main-heading-text">Zeta Message Board</h1>
-    </header>
-    <form id="addMessageForm">
+<section class="container" ng-controller="MessageController">
+
+    <form id="addMessageForm"  >
+        <header class="container">
+            <h1 class="main-heading-text">Zeta Message Board Admin Area</h1>
+        </header>
         <section id="entryForm" class=" message-container">
             <div class="input-container">
-                <input class="form-input" type="text" id="enterFirstName" name="enterFirstName" placeholder="Enter Your Name"/>
+                <input ng-model="message.name" class="form-input" type="text" id="enterFirstName" name="enterFirstName" placeholder="Enter Your Name"/>
             </div>
             <div class="text-area-container">
-                <textarea class="form-input" id="enterMessage" name="enterMessage" placeholder="Enter Your Message"></textarea>
+                <textarea ng-model="message.message" class="form-input" id="enterMessage" name="enterMessage" placeholder="Enter Your Message"></textarea>
             </div>
+
             <div class="button-container">
-                <button id="addMessageButton" class="btn btn-info">Add Message&nbsp;<span class="button-plus-sign">+</span></button>
+                <button id="addMessageButton"   ng-click="addMessage(message)" class="btn btn-info">Add Message&nbsp;<span class="button-plus-sign">+</span></button>
             </div>
         </section>
     </form>
-    <div id="messageContainer"></div>
 
+
+    <div id="messageContainer" >
+        <div ng-repeat="message in messagesArray">
+            <div class='message-container well'>
+                <p class='message-name'>{{ message.name }}</p>
+                <p class='message-body'>{{ message.message }}</p>
+                <p style="visibility: hidden;" class="message-id">{{message._id}}</p>
+                <div class='button-container'>
+                    <button data-id="{{message._id}}" ng-click="deleteMessage()" class='delete btn btn-danger'>X</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 </body>
 </html>
