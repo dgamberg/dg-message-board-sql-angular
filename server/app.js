@@ -45,8 +45,8 @@ app.get('/data', function(req,res){
 app.post('/data', function(req,res){
     // pull the data off of the request
     var addedMessage = {
-        "name" : req.body.enterFirstName,
-        "message" : req.body.enterMessage
+        "name" : req.body.name,
+        "message" : req.body.message
 
     };
 
