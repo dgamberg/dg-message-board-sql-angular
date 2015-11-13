@@ -8,7 +8,6 @@ myApp.controller('MessageController', ['$scope', '$http', function($scope, $http
    $scope.addMessage = function(response){
       $http.post('/data', response).then(function(response){
          console.log(response);
-         //console.log($scope.message);
          $scope.getMessages();
       });
    };
@@ -22,15 +21,12 @@ myApp.controller('MessageController', ['$scope', '$http', function($scope, $http
    };
 
    //DELETE MESSAGE
-   $scope.deleteMessage = function(){
-      console.log($scope.message.id);
-      $http({
-         method: 'PUT',
-         url: '/data'
-      }).then(function(){
+   $scope.deleteMessage = function(message){
+      console.log(message.id);
+      $http.put('/data/' + message.id).then(function(){
          $scope.getMessages();
       });
-   }
+   };
 
    //READ all messages
    $scope.getMessages();
